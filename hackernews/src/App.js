@@ -26,7 +26,12 @@ class App extends Component {
 
 		this.state = {
 			list,
+			searchTerm: '',
 		}
+	}
+
+	onSearchChange = (event) => {
+		this.setState({ searchTerm: event.target.value });
 	}
 
 	onDismiss = (id) => {
@@ -37,24 +42,30 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				{this.state.list.map(item =>
-					<div key={item.objectID}>
-						<span>
-							<a href={item.url}>{item.title}</a>
-						</span>
-						<span>{item.author}</span>
-						<span>{item.num_comments}</span>
-						<span>{item.points}</span>
-						<span>
-							<button
-								onClick={() => this.onDismiss(item.objectID)}
-								type="button"
-							>
-								Dismiss
-							</button>
-						</span>
-					</div>
-				)}
+				<form>
+					<input type="text" onChange={this.onSearchChange}/>
+				</form>
+				{this.state.list.filter(() => true).map(item => {
+					const onHandleDismiss = () => this.onDismiss(item.objectID);
+					return (
+						<div key={item.objectID}>
+							<span>
+								<a href={item.url}>{item.title}</a>
+							</span>
+							<span>{item.author}</span>
+							<span>{item.num_comments}</span>
+							<span>{item.points}</span>
+							<span>
+								<button
+									onClick={onHandleDismiss}
+									type="button"
+								>
+									Dismiss
+								</button>
+							</span>
+						</div>
+					)
+				})}
 			</div>
 		);
 	}
