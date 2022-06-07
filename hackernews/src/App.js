@@ -20,6 +20,8 @@ const list = [
 	},
 ];
 
+const isSearched = (searchTerm) => (item) => item.title.toLowerCase().includes(searchTerm.toLowerCase());
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -40,13 +42,45 @@ class App extends Component {
 	}
 
 	render() {
+		const { searchTerm, list } = this.state;
 		return (
 			<div className="App">
-				<form>
-					<input type="text" onChange={this.onSearchChange}/>
-				</form>
-				{this.state.list.filter(() => true).map(item => {
-					const onHandleDismiss = () => this.onDismiss(item.objectID);
+				<Search
+					value={searchTerm}
+					onChange={this.onSearchChange}
+				/>
+				<Table
+					list={list}
+					pattern={searchTerm}
+					onDismiss={this.onDismiss}
+				/>
+			</div>
+		);
+	}
+}
+
+class Search extends Component {
+	render() {
+		const { value, onChange } = this.props;
+		return (
+			<form>
+				<input
+					type="text"
+					value={value}
+					onChange={onChange}
+				/>
+			</form>
+		);
+	}
+}
+
+class Table extends Component {
+	render() {
+		const { list, pattern, onDismiss } = this.props;
+		return (
+			<div>
+				{list.filter(isSearched(pattern)).map(item => {
+					const onHandleDismiss = () => onDismiss(item.objectID);
 					return (
 						<div key={item.objectID}>
 							<span>
@@ -67,7 +101,7 @@ class App extends Component {
 					)
 				})}
 			</div>
-		);
+		)
 	}
 }
 
