@@ -46,7 +46,8 @@ class App extends Component {
 		const { hits, page } = result;
 		const { searchKey, results } = this.state;
 
-		if (results && results[searchKey] && results[searchKey].page <= page) {
+		// error handling for duplicate or outdated API requests
+		if (results && results[searchKey] && results[searchKey].page >= page) {
 			return;
 		}
 
