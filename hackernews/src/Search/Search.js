@@ -7,6 +7,6 @@ export const Search = ({ value, onChange, onSubmit, children }) =>
 			onChange={onChange}
 		/>
 		<button type="submit">
-			{children}
+			Search
 		</button>
 	</form>)

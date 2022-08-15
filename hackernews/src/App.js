@@ -103,7 +103,7 @@ class App extends Component {
 						onChange={this.onSearchChange}
 						onSubmit={this.onSearchSubmit}
 					>
-						Search
+						Search term
 					</Search>
 				</div>
 				{ error ?
@@ -130,4 +130,10 @@ class App extends Component {
 }
 
 export default App;
+
+export {
+	Button,
+	Search,
+	Table,
+};
 
