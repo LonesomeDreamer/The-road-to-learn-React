@@ -10,14 +10,25 @@ describe('App', () => {
 
 describe("Search", () => {
 	it("renders Search crashing", () => {
-		const { asFragment } = render(<Search>Search</Search>);
+		const { asFragment } = render(
+			<Search
+				onChange={() => true}
+				onSubmit={() => true}
+			>
+				Search
+			</Search>);
 		expect(asFragment()).toMatchSnapshot();
 	});
 });
 
 describe("Button", () => {
 	it("renders Button without crashing", () => {
-		const { asFragment } = render(<Button>Give Me More</Button>);
+		const { asFragment } = render(
+			<Button
+				onClick={() => true}
+			>
+				Give Me More
+			</Button>);
 		expect(asFragment()).toMatchSnapshot();
 	});
 });
@@ -40,6 +51,7 @@ describe("Table", () => {
 				objectID: "z",
 			},
 		],
+		onDismiss: () => true
 	};
 	it("renders Table without crashing", () => {
 		const { asFragment } = render(<Table {...props} />);
