@@ -1,3 +1,1 @@
-import { Search } from './Search.js';
-
-export { Search };
+export { Search } from './Search.js';

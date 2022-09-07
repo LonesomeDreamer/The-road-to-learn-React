@@ -1,0 +1,1 @@
+const Loading = () => <div>Loading..</div>

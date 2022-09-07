@@ -22,7 +22,8 @@ class App extends Component {
 			results: null,
 			searchKey: '',
 			searchTerm: DEFAULT_QUERY,
-			error: null
+			error: null,
+			isLoading: false,
 		}
 	}
 
