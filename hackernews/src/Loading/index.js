@@ -1,1 +1,1 @@
-export { Loading } from "./Loading.js";
+export { Loading, withLoading } from "./Loading.js";
