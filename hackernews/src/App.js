@@ -14,7 +14,7 @@ import { Button } from "./Button";
 import { Table } from "./Table";
 import { Search } from './Search';
 import { withLoading } from './Loading';
-const ButtonWithLoading = withLoading(Button)
+const ButtonWithLoading = withLoading(Button);
 
 class App extends Component {
 	constructor(props) {
