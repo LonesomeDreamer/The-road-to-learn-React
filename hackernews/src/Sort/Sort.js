@@ -1,7 +1,23 @@
 import { Button } from "../Button";
+import classNames from "classnames";
+import PropTypes from "prop-types";
 
-export const Sort = ({ sortKey, onSort, children }) => (
-	<Button onClick={() => onSort(sortKey)} className="button-inline">
+export const Sort = ({ sortKey, onSort, activeSortKey, children }) => {
+	const sortClass = classNames(
+		"button-inline",
+		{ "button-active": sortKey === activeSortKey }
+	);
+
+	return (
+	<Button onClick={() => onSort(sortKey)} className={sortClass}>
 		{children}
 	</Button>
-);
+	)
+};
+
+Sort.propTypes = {
+	sortKey: PropTypes.string.isRequired,
+	onSort: PropTypes.func.isRequired,
+	activeSortKey: PropTypes.string.isRequired,
+	children: PropTypes.node.isRequired
+};

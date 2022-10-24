@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Button } from "../Button";
 import { Sort } from "../Sort";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { sortBy } from "lodash";
 
 const largeColumn = {
@@ -19,7 +19,8 @@ export class Table extends Component {
 		super(props);
 
 		this.state = {
-			sortKey: 'NONE'
+			sortKey: 'NONE',
+			isSortReverse: false
 		}
 
 		this.sorts = {
@@ -32,38 +33,40 @@ export class Table extends Component {
 	}
 
 	onSort = (sortKey) => {
-		this.setState({ sortKey });
+		const isSortReverse = this.state.sortKey === sortKey && !this.state.isSortReverse;
+		this.setState({ sortKey, isSortReverse });
 	}
 
 	render() {
 		const { list, onDismiss } = this.props;
-		const { sortKey } = this.state;
+		const { sortKey, isSortReverse } = this.state;
+		const sortedList = isSortReverse ? this.sorts[sortKey](list).reverse() : this.sorts[sortKey](list);
 		return (
 			<div className="table">
 				<div className="table-header">
 					<span style={largeColumn}>
-						<Sort sortKey={"TITLE"} onSort={this.onSort}>
+						<Sort sortKey={"TITLE"} onSort={this.onSort} activeSortKey={sortKey}>
 							Title
 						</Sort>
 					</span>
 					<span style={midColumn}>
-						<Sort sortKey={"AUTHOR"} onSort={this.onSort}>
+						<Sort sortKey={"AUTHOR"} onSort={this.onSort} activeSortKey={sortKey}>
 							Author
 						</Sort>
 					</span>
 					<span style={smallColumn}>
-						<Sort sortKey={"COMMENTS"} onSort={this.onSort}>
+						<Sort sortKey={"COMMENTS"} onSort={this.onSort} activeSortKey={sortKey}>
 							Comments
 						</Sort>
 					</span>
 					<span style={smallColumn}>
-						<Sort sortKey={"POINTS"} onSort={this.onSort}>
+						<Sort sortKey={"POINTS"} onSort={this.onSort} activeSortKey={sortKey}>
 							Points
 						</Sort>
 					</span>
 					<span style={smallColumn}>Archive</span>
 				</div>
-				{this.sorts[sortKey](list).map((item) => {
+				{sortedList.map((item) => {
 					return (
 						<div key={item.objectID} className="table-row">
 							<span style={largeColumn}>
