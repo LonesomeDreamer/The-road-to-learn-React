@@ -1,5 +1,9 @@
-import { render } from '@testing-library/react';
-import App, { Search, Button, Table } from './App';
+import { render } from "@testing-library/react";
+import App from "./App";
+import { Search } from "./Search";
+import { Button } from "./Button";
+import { Sort } from "./Sort";
+import { Table } from "./Table";
 
 describe('App', () => {
 	test('renders App without crashing', () => {
@@ -9,7 +13,7 @@ describe('App', () => {
 });
 
 describe("Search", () => {
-	it("renders Search crashing", () => {
+	it("renders Search without crashing", () => {
 		const { asFragment } = render(
 			<Search
 				onChange={() => true}
@@ -29,6 +33,20 @@ describe("Button", () => {
 			>
 				Give Me More
 			</Button>);
+		expect(asFragment()).toMatchSnapshot();
+	});
+});
+
+describe("Sort", () => {
+	it("renders Sort without crashing", () => {
+		const { asFragment } = render(
+			<Sort
+				sortKey={"testSortKey1"}
+				onSort={() => true}
+				activeSortKey={"testSortKey2"}
+			>
+				Points
+			</Sort>);
 		expect(asFragment()).toMatchSnapshot();
 	});
 });
