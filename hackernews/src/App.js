@@ -25,7 +25,7 @@ class App extends Component {
 			searchKey: '',
 			searchTerm: DEFAULT_QUERY,
 			error: null,
-			isLoading: false,
+			isLoading: false
 		}
 	}
 
@@ -42,25 +42,29 @@ class App extends Component {
 
 	setSearchTopStories = (result) => {
 		const { hits, page } = result;
-		const { searchKey, results } = this.state;
 
-		// error handling for duplicate or outdated API requests
-		if (results && results[searchKey] && results[searchKey].page >= page) {
-			return;
-		}
+		this.setState((prevState) => {
+			const { searchKey, results } = prevState;
 
-		const oldHits = results && results[searchKey] ? results[searchKey].hits : [];
+			// error handling for duplicate or outdated API requests
+			if (results && results[searchKey] && results[searchKey].page >= page) {
+				return;
+			}
 
-		const updatedHits = [
-			...oldHits,
-			...hits
-		];
-		this.setState({
-			results: {
-				...results,
-				[searchKey]: { hits: updatedHits, page }
-			},
-			isLoading: false,
+			const oldHits = results && results[searchKey] ? results[searchKey].hits : [];
+
+			const updatedHits = [
+				...oldHits,
+				...hits
+			];
+
+			return {
+				results: {
+					...results,
+					[searchKey]: { hits: updatedHits, page }
+				},
+				isLoading: false
+			}
 		});
 	}
 
