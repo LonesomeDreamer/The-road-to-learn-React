@@ -32,9 +32,13 @@ export class Table extends Component {
 		};
 	}
 
+	onSortUpdate = (sortKey) => (prevState) => {
+		const isSortReverse = prevState.sortKey === sortKey && !prevState.isSortReverse;
+		return { sortKey, isSortReverse };
+	}
+
 	onSort = (sortKey) => {
-		const isSortReverse = this.state.sortKey === sortKey && !this.state.isSortReverse;
-		this.setState({ sortKey, isSortReverse });
+		this.setState(this.onSortUpdate(sortKey));
 	}
 
 	render() {

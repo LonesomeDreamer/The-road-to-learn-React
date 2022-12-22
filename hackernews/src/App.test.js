@@ -12,6 +12,27 @@ describe('App', () => {
 	});
 });
 
+describe('App.prototype.updateSearchTopStoriesState()', () => {
+	test('sets state without errors', () => {
+		var app = new App();
+		app.state.results = {
+			"react": { hits: [ { author: "Author", num_comments: "9", points: 100023 } ], page: 0 }
+		};
+		app.state.searchKey = "Test React";
+		const newState = app.updateSearchTopStoriesState(
+			[ { author: "Artyom", num_comments: "25", points: 2003 } ],
+			2
+		)(app.state);
+		expect(newState).toEqual({
+			results: {
+				"react": { hits: [ { author: "Author", num_comments: "9", points: 100023 } ], page: 0 },
+				"Test React": { hits: [ { author: "Artyom", num_comments: "25", points: 2003 } ], page: 2 },
+			},
+			isLoading: false
+		});
+	});
+});
+
 describe("Search", () => {
 	it("renders Search without crashing", () => {
 		const { asFragment } = render(
