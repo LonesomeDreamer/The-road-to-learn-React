@@ -5,15 +5,15 @@ import { Button } from "./Button";
 import { Sort } from "./Sort";
 import { Table } from "./Table";
 
-describe('App', () => {
-	test('renders App without crashing', () => {
+describe("App", () => {
+	test("renders App without crashing", () => {
 		const { asFragment } = render(<App />);
 		expect(asFragment()).toMatchSnapshot();
 	});
 });
 
-describe('App.prototype.updateSearchTopStoriesState()', () => {
-	test('sets state without errors', () => {
+describe("App.prototype.updateSearchTopStoriesState()", () => {
+	test("sets state without errors", () => {
 		var app = new App();
 		app.state.results = {
 			"react": { hits: [ { author: "Author", num_comments: "9", points: 100023 } ], page: 0 }
