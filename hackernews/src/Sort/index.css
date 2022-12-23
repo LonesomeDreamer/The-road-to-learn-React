@@ -1,3 +1,14 @@
-.button-active {
-	background-color: #CCCCCC;
+.button-inline > .imageHolder {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 15px;
+	width: 15px;
+	margin-right: 2px;
+	background-image: url("./images/sort_arrow.png");
+	background-size: auto 100%;
+}
+
+.imageHolder.reverse {
+	transform: rotate(180deg);
 }

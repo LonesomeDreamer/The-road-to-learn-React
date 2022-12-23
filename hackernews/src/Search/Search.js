@@ -18,7 +18,7 @@ export class Search extends Component {
 
 		return (
 			<form onSubmit={onSubmit}>
-				{children}
+				<p>{children}</p>
 				<input
 					type="text"
 					value={value}

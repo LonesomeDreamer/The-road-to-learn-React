@@ -122,7 +122,7 @@ class App extends Component {
 						onChange={this.onSearchChange}
 						onSubmit={this.onSearchSubmit}
 					>
-						Search term
+						What do you want to find?
 					</Search>
 				</div>
 				{ error ?
